@@ -11,13 +11,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			handleNewCounter: (name) => {
-				const store = getStore();
-				const newCounter = {
-					name,
-					count: 0
-				};
-				const counters = [ ...store.counters, newCounter ];
-				setStore({ counters });
+				if (name.trim() !== '') {
+					const store = getStore();
+					const newCounter = {
+						name,
+						count: 0
+					};
+					const counters = [ ...store.counters, newCounter ];
+					setStore({ counters });
+				}
 			},
 			handleAddition: (item) => {
 				const store = getStore();
@@ -67,7 +69,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ sort });
 			},
 			handleSearch: (query) => {
-				setStore({ query });
+				if (query.trim() !== '') {
+					setStore({ query });
+				}
 			}
 		}
 	};

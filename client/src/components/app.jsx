@@ -2,7 +2,8 @@ import React from 'react';
 import './app.css';
 import injectContext, { Consumer } from '../store/appContext';
 import CounterHolder from './counterHolder/counterHolder';
-import Header from './header/header';
+import TotalCount from './totalCount/totalCount';
+import CounterGenerator from './counterGenerator/counterGenerator';
 import _ from 'lodash';
 import Searchbox from './searchbox/searchbox';
 
@@ -19,9 +20,10 @@ const App = () => {
 
 				return (
 				<>
-				<Header total={total} actions={actions} />
-				<Searchbox onSearch={actions.handleSearch}/>
-				<CounterHolder items={sorted} actions={actions} sort={sort} />
+					<Searchbox onSearch={actions.handleSearch}/>
+					<TotalCount total={total} />
+					<CounterHolder items={sorted} actions={actions} sort={sort} />
+					<CounterGenerator onNewCounter={actions.handleNewCounter} />
 				</>)
 			}}
 		</Consumer>
