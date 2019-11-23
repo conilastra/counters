@@ -8,8 +8,8 @@ const CounterTable = ({ items, actions, sort }) => {
 		<table>
 			<thead>
 				<tr>
-					<th className="clickable" onClick={() => actions.handleSort('name')}>
-						Name {sort.column === 'name' ? sort.order === 'asc' ? <FaSortDown /> : <FaSortUp /> : ''}
+					<th className="clickable" onClick={() => actions.handleSort('title')}>
+						Title {sort.column === 'title' ? sort.order === 'asc' ? <FaSortDown /> : <FaSortUp /> : ''}
 					</th>
 					<th />
 					<th className="clickable text-center" onClick={() => actions.handleSort('count')}>

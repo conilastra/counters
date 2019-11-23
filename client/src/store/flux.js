@@ -1,7 +1,11 @@
+import Axios from 'axios';
+
+const apiEndpoint = '/api/v1/counter';
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			counters: [ { name: 'Dogs', count: 0 }, { name: 'Cats', count: 0 }, { name: 'Owls', count: 0 } ],
+			counters: [],
 			sort: {
 				column: '',
 				order: '',
@@ -14,41 +18,51 @@ const getState = ({ getStore, getActions, setStore }) => {
 			}
 		},
 		actions: {
-			handleNewCounter: (name) => {
-				if (name.trim() !== '') {
+			getCounters: async () => {
+				const response = await Axios.get(`${apiEndpoint}s`);
+				setStore({ counters: response.data });
+			},
+			handleNewCounter: async (title) => {
+				if (title.trim() !== '') {
 					const store = getStore();
-					const newCounter = {
-						name,
-						count: 0
-					};
-					const counters = [ ...store.counters, newCounter ];
+
+					const obj = { title };
+					const { data: counter } = await Axios.post(apiEndpoint, obj);
+					const counters = [ ...store.counters, counter ];
+
 					setStore({ counters });
 				}
 			},
-			handleAddition: (item) => {
+			handleAddition: async (item) => {
 				const store = getStore();
 				const counters = [ ...store.counters ];
 				const index = counters.indexOf(item);
-				counters[index] = { ...item };
-				counters[index].count += 1;
+
+				const obj = { id: item.id };
+				const { data: counter } = await Axios.post(`${apiEndpoint}/inc`, obj);
+				counters[index] = { ...counter };
 
 				setStore({ counters });
 			},
-			handleSubstraction: (item) => {
+			handleSubstraction: async (item) => {
 				const store = getStore();
 				const counters = [ ...store.counters ];
 				const index = counters.indexOf(item);
-				counters[index] = { ...item };
-				counters[index].count -= 1;
+
+				const obj = { id: item.id };
+				const { data: counter } = await Axios.post(`${apiEndpoint}/dec`, obj);
+				counters[index] = { ...counter };
 
 				setStore({ counters });
 			},
-			handleDelete: (item) => {
+			handleDelete: async (item) => {
 				const store = getStore();
 				let counters = [ ...store.counters ];
 				counters = counters.filter((c) => c !== item);
-				console.log(counters);
 				setStore({ counters });
+
+				const obj = { id: item.id };
+				await Axios.delete(apiEndpoint, { data: obj });
 			},
 			handleSort: (selectedColumn) => {
 				const store = getStore();

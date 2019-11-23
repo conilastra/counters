@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import './counterGenerator.css';
 
 const CounterGenerator = ({ onNewCounter }) => {
-	const [ name, setName ] = useState('');
+	const [ title, setTitle ] = useState('');
 
 	const handleInput = (e) => {
 		const value = e.target.value;
-		setName(value);
+		setTitle(value);
 	};
 
 	return (
@@ -14,13 +14,13 @@ const CounterGenerator = ({ onNewCounter }) => {
 			className="counter-generator"
 			onSubmit={(e) => {
 				e.preventDefault();
-				setName('');
-				onNewCounter(name);
+				setTitle('');
+				onNewCounter(title);
 			}}
 		>
 			<input
-				name="name"
-				value={name}
+				name="title"
+				value={title}
 				placeholder="Add a new counter"
 				type="text"
 				onChange={(e) => handleInput(e)}

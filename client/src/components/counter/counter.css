@@ -1,5 +1,6 @@
 button {
 	cursor: pointer;
+	outline: none;
 }
 
 .counter-btn {
@@ -31,4 +32,8 @@ button {
 
 td:first-child {
 	min-width: 83px;
+}
+
+td:nth-child(3) {
+	min-width: 46px;
 }

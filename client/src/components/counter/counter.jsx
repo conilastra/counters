@@ -2,10 +2,10 @@ import React from 'react';
 import './counter.css';
 
 const Counter = ({ item, actions }) => {
-	const { name, count } = item;
+	const { title, count } = item;
 	return (
 		<tr>
-			<td>{name}</td>
+			<td>{title}</td>
 
 			<td>
 				<button className="counter-btn" onClick={(e) => actions.handleSubstraction(item)}>

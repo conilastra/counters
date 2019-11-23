@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import getState from './flux.js';
 
 export const { Consumer, Provider } = React.createContext(null);
@@ -16,17 +16,6 @@ const injectContext = (PassedComponent) => {
 					})
 			})
 		);
-
-		useEffect(() => {
-			/**
-			 * EDIT THIS!
-			 * This function is the equivalent to "window.onLoad", it only run once on the entire application lifetime
-			 * you should do your ajax requests or fetch api requests here
-			 *
-			 * state.loadSomeData(); <---- calling this function from the flux.js actions
-			 *
-			 **/
-		}, []);
 
 		return (
 			<Provider value={state}>

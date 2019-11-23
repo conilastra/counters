@@ -6,6 +6,7 @@
 .searchbox input {
 	border: 1px solid #bdbcbc;
 	border-radius: 30px;
+	outline: none;
 	padding: .3rem 1rem;
 }
 
