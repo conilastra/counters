@@ -6,7 +6,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				column: '',
 				order: '',
 				active: false
-			}
+			},
+			query: ''
 		},
 		actions: {
 			handleNewCounter: (name) => {
@@ -64,6 +65,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 				setStore({ sort });
+			},
+			handleSearch: (query) => {
+				setStore({ query });
 			}
 		}
 	};
