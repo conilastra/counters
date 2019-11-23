@@ -1,0 +1,22 @@
+.searchbox {
+	align-items: center;
+	display: flex;
+}
+
+.searchbox input {
+	border: 1px solid #bdbcbc;
+	border-radius: 30px;
+	padding: .3rem 1rem;
+}
+
+.searchbox input::placeholder {
+	color: #888b90;
+	font-size: .8rem;
+}
+
+.searchbox__icon {
+	color: #888b90;
+	left: -2rem;
+	position: relative;
+	top: .2rem;
+}

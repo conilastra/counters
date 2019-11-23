@@ -7,7 +7,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				order: '',
 				active: false
 			},
-			query: ''
+			query: '',
+			filter: {
+				type: '',
+				number: ''
+			}
 		},
 		actions: {
 			handleNewCounter: (name) => {
@@ -46,13 +50,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(counters);
 				setStore({ counters });
 			},
-			/* handleSelectedColumn = item => {
-				const store = getStore();
-				store.sort.column = item;
-				
-				setStore({ sort })
-				console.log(store.sort);
-			}, */
 			handleSort: (selectedColumn) => {
 				const store = getStore();
 				let sort = { ...store.sort };
@@ -71,7 +68,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 			handleSearch: (query) => {
 				if (query.trim() !== '') {
 					setStore({ query });
+				} else {
+					setStore({ query: '' });
 				}
+			},
+			handleFilter: (type, amount) => {
+				let number;
+				if (amount !== '') {
+					number = parseInt(amount);
+				} else {
+					number = '';
+				}
+				setStore({ filter: { type, number } });
 			}
 		}
 	};

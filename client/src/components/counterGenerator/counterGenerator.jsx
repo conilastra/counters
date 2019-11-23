@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './counterGenerator.css';
 
 const CounterGenerator = ({ onNewCounter }) => {
 	const [ name, setName ] = useState('');
@@ -10,6 +11,7 @@ const CounterGenerator = ({ onNewCounter }) => {
 
 	return (
 		<form
+			className="counter-generator"
 			onSubmit={(e) => {
 				e.preventDefault();
 				setName('');
@@ -19,7 +21,7 @@ const CounterGenerator = ({ onNewCounter }) => {
 			<input
 				name="name"
 				value={name}
-				placeholder="Add a new counter:"
+				placeholder="Add a new counter"
 				type="text"
 				onChange={(e) => handleInput(e)}
 			/>

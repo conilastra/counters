@@ -1,4 +1,5 @@
 import React from 'react';
+import './counter.css';
 
 const Counter = ({ item, actions }) => {
 	const { name, count } = item;
@@ -7,15 +8,21 @@ const Counter = ({ item, actions }) => {
 			<td>{name}</td>
 
 			<td>
-				<button onClick={(e) => actions.handleSubstraction(item)}>-</button>
+				<button className="counter-btn" onClick={(e) => actions.handleSubstraction(item)}>
+					-
+				</button>
 			</td>
-			<td>{count}</td>
+			<td className="text-center">{count}</td>
 			<td>
-				<button onClick={(e) => actions.handleAddition(item)}>+</button>
+				<button className="counter-btn" onClick={(e) => actions.handleAddition(item)}>
+					+
+				</button>
 			</td>
 
 			<td>
-				<button onClick={(e) => actions.handleDelete(item)}>Delete</button>
+				<button className="delete-btn" onClick={(e) => actions.handleDelete(item)}>
+					Delete
+				</button>
 			</td>
 		</tr>
 	);

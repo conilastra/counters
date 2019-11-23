@@ -1,3 +1,28 @@
 * {
 	font-family: "Avenir Next";
 }
+
+body {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+header {
+	align-content: center;
+	background-color: #f7f7f794;
+	border-bottom: 1px solid #eaeaea;
+	display: flex;
+	justify-content: space-between;
+	padding: .8rem 1rem;
+}
+
+@media (min-width: 768px) {
+	header {
+		padding: .8rem 7rem;
+	}
+}
+
+main {
+	padding: 1rem;
+}
