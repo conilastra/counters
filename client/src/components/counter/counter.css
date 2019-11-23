@@ -1,3 +1,7 @@
+button {
+	cursor: pointer;
+}
+
 .counter-btn {
 	background: #e8e8e8;
 	border: none;
@@ -11,10 +15,20 @@
 }
 
 .delete-btn {
-	background: #ff404c;
+	background-color: #ff404c;
 	border: none;
 	border-radius: 30px;
 	color: white;
 	font-size: 80%;
+	margin-left: 2rem;
 	padding: .25rem .7rem;
+	transition: background-color .5s ease-out;
+}
+
+.delete-btn:hover {
+	background-color: #f51b29;
+}
+
+td:first-child {
+	min-width: 83px;
 }
