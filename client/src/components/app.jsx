@@ -35,24 +35,29 @@ const App = () => {
 				}
 				
 				return (
-				<>
+					<>
 					<header>
 						<Searchbox onSearch={actions.handleSearch}/>
 						<TotalCount total={total ? total : 0} />
 					</header>
 
-					
-					<main>
 					{counters.length ? 
 					<>
-						<Filters actions={actions} />
+					<Filters actions={actions} />
+					<main>
 						<CounterHolder items={sorted} actions={actions} sort={sort} />
-					</>: <h1 className="text-center">You don't have any counters yet</h1>}
 						<CounterGenerator onNewCounter={actions.handleNewCounter} /> 
-					</main>	
+					</main>
+					</>
+					: 
+					<main id="full-screen">
+						<h1 className="text-center">You don't have any counters yet</h1>
+						<CounterGenerator onNewCounter={actions.handleNewCounter} /> 
+					</main>
+					}
 					
-				</>)
-			}}
+					</>)
+					}}
 		</Consumer>
 	);
 };

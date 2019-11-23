@@ -3,6 +3,7 @@ import './counterGenerator.css';
 
 const CounterGenerator = ({ onNewCounter }) => {
 	const [ title, setTitle ] = useState('');
+	const [ display, setDisplay ] = useState('hidden');
 
 	const handleInput = (e) => {
 		const value = e.target.value;
@@ -11,6 +12,7 @@ const CounterGenerator = ({ onNewCounter }) => {
 
 	return (
 		<form
+			autocomplete="off"
 			className="counter-generator"
 			onSubmit={(e) => {
 				e.preventDefault();
@@ -18,11 +20,18 @@ const CounterGenerator = ({ onNewCounter }) => {
 				onNewCounter(title);
 			}}
 		>
+			<button
+				className="counter-generator__btn"
+				onClick={() => (display === '' ? setDisplay('hidden') : setDisplay(''))}
+			>
+				Add a counter
+			</button>
 			<input
 				name="title"
 				value={title}
-				placeholder="Add a new counter"
+				placeholder="Give it a name and press enter"
 				type="text"
+				className={display}
 				onChange={(e) => handleInput(e)}
 			/>
 		</form>
