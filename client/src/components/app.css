@@ -41,7 +41,7 @@ main {
 
 #full-screen {
 	display: flex;
-	padding: 20% 10%;
+	padding: 40% 10%;
 	flex-wrap: wrap;
 	justify-content: center;
 }

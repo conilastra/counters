@@ -24,7 +24,7 @@ const CounterGenerator = ({ onNewCounter }) => {
 				className="counter-generator__btn"
 				onClick={() => (display === '' ? setDisplay('hidden') : setDisplay(''))}
 			>
-				Add a counter
+				Create counter
 			</button>
 			<input
 				name="title"

@@ -34,10 +34,12 @@ const App = () => {
 				
 				return (
 					<>
+						{allCounters.length ?
 						<header>
 							<Searchbox onSearch={actions.handleSearch} value={store.query} />
 							<TotalCount total={total ? total : 0} />
-						</header>
+						</header> :
+						''}
 
 						{allCounters.length ? 
 						<>
