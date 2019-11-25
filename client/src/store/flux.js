@@ -33,9 +33,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					const obj = { title };
 					const { data: counter } = await Axios.post(apiEndpoint, obj);
-					const counters = [ ...store.counters, counter ];
+					const counters = store.allCounters.length
+						? [ ...store.allCounters, counter ]
+						: [ ...store.counters, counter ];
 
-					setStore({ counters });
+					const filter = { lessQuery: '', greaterQuery: '' };
+					const query = '';
+
+					setStore({ counters, filter, query });
 				}
 			},
 			handleAddition: async (item) => {
@@ -70,9 +75,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			handleDelete: async (item) => {
 				const store = getStore();
-				let counters = [ ...store.counters ];
+				let counters = store.allCounters.length ? [ ...store.allCounters ] : [ ...store.counters ];
 				counters = counters.filter((c) => c !== item);
-				setStore({ counters });
+				setStore({ counters, allCounters: counters });
 
 				const obj = { id: item.id };
 				await Axios.delete(apiEndpoint, { data: obj });
