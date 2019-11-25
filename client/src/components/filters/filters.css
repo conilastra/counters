@@ -4,35 +4,49 @@
 	font-size: 80%;
 	margin-bottom: 1rem;
 	padding: .5rem 1rem;
-	width: 40%;
+	width: 33%;
+}
+
+.filters__header {
+	align-content: center;
+	color: gray;
+	display: flex;
 }
 
 h6 {
-	font-size: 90%;
+	font-size: 95%;
+	font-weight: normal;
 	margin: 0;
 }
 
 .icon {
-	margin-left: 1rem;
 	cursor: pointer;
+	font-size: 90%;
+	margin-left: .5rem;
+	margin-top: .1rem;
 }
 
 .sm-input {
+	background-color: #f3f1f1;
 	border: none;
-	border-bottom: 2px solid #2b2b2b;
+	border-radius: 100%;
 	display: inline-block;
+	margin-left: .1rem;
 	outline: none;
-	width: 2rem;
+	text-align: center;
+	width: 1.5rem;
 }
 
 .row {
-	display: block;
+	align-items: flex-end;
+	display: flex;
 	padding-bottom: .5rem;
 }
 
 .row:first-child {
 	padding-top: 1rem;
 }
+
 .hide {
 	display: none;
 }

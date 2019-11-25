@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import _ from 'lodash';
 
 const apiEndpoint = '/api/v1/counter';
 
@@ -6,6 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			counters: [],
+			allCounters: [],
 			sort: {
 				column: '',
 				order: 'desc',
@@ -22,7 +24,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			getCounters: async () => {
 				const response = await Axios.get(`${apiEndpoint}s`);
-				setStore({ counters: response.data });
+				const counters = response.data;
+				setStore({ counters });
 			},
 			handleNewCounter: async (title) => {
 				if (title.trim() !== '') {
@@ -39,7 +42,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				const sort = store.sort;
 				sort.active = false;
-				sort.column = '';
 				await setStore({ sort });
 
 				const counters = [ ...store.counters ];
@@ -53,6 +55,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			handleSubstraction: async (item) => {
 				const store = getStore();
+				const sort = store.sort;
+				sort.active = false;
+				await setStore({ sort });
+
 				const counters = [ ...store.counters ];
 				const index = counters.indexOf(item);
 
@@ -74,6 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			handleSort: (selectedColumn) => {
 				const store = getStore();
 				let sort = { ...store.sort };
+				let sortedCounters = [ ...store.counters ];
 
 				if (sort.column === selectedColumn) {
 					sort.order = sort.order === 'asc' ? 'desc' : 'asc';
@@ -84,31 +91,49 @@ const getState = ({ getStore, getActions, setStore }) => {
 					sort.active = true;
 				}
 
-				setStore({ sort });
+				sortedCounters = sort.active
+					? _.orderBy(sortedCounters, [ sort.column ], [ sort.order ])
+					: sortedCounters;
+
+				setStore({ sort, counters: sortedCounters });
 			},
 			handleSearch: (query) => {
+				const store = getStore();
+				let allCounters = [ ...store.counters ];
+
 				if (query.trim() !== '') {
-					setStore({ query });
+					let counters = store.counters.filter((c) => c.title.toLowerCase().includes(query.toLowerCase()));
+					setStore({ query, counters, allCounters });
 				} else {
-					setStore({ query: '' });
+					setStore({ query: '', counters: store.allCounters });
 				}
 			},
-			handleFilter: (type, number) => {
+			handleFilter: (type, queryType, number) => {
 				const store = getStore();
+				let allCounters = [ ...store.counters ];
+
 				const filter = { ...store.filter };
-				const query = parseInt(number);
+				let query = parseInt(number);
+				query = Number.isNaN(query) ? '' : query;
 
-				if (query) {
+				if (query !== '') {
+					filter[type] = true;
+					filter[queryType] = query;
+					let counters = [ ...store.counters ];
+
 					if (type === 'less') {
-						filter.less = true;
-						filter.lessQuery = query;
+						counters = counters.filter((i) => i.count < filter.lessQuery);
 					} else {
-						filter.greater = true;
-						filter.greaterQuery = query;
+						counters = counters.filter((i) => i.count > filter.greaterQuery);
 					}
-				}
 
-				setStore({ filter });
+					setStore({ filter, counters, allCounters });
+				} else {
+					filter[type] = false;
+					filter[queryType] = '';
+
+					setStore({ filter, counters: store.allCounters });
+				}
 			},
 			cleanFilter: (type, queryType) => {
 				const store = getStore();
@@ -118,9 +143,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ filter });
 			},
 			cleanSearch: () => {
-				const actions = getActions();
-				actions.cleanFilter();
-				setStore({ query: '' });
+				const store = getStore();
+				let filter = { ...store.filter };
+
+				if (filter.less) {
+					filter.less = false;
+					filter.lessQuery = '';
+				} else if (filter.greater) {
+					filter.greater = false;
+					filter.greaterQuery = '';
+				}
+
+				setStore({ query: '', filter, counters: store.allCounters });
 			}
 		}
 	};

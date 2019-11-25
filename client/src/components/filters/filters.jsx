@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './filters.css';
-import { FaSortDown } from 'react-icons/fa';
+import { IoMdClose } from 'react-icons/io';
+import { FaSlidersH } from 'react-icons/fa';
 
 const Filters = ({ actions, value }) => {
 	const [ display, setDisplay ] = useState('hide');
@@ -15,9 +16,12 @@ const Filters = ({ actions, value }) => {
 
 	return (
 		<div className="filters">
-			<h6 onClick={toggleDisplay}>
-				Filter your results <span className="icon">{display !== 'show' ? <FaSortDown /> : 'x'}</span>
-			</h6>
+			<div className="filters__header" onClick={toggleDisplay}>
+				<h6>Filter your results</h6>
+				<div className="icon">
+					<FaSlidersH />
+				</div>
+			</div>
 			<div className={display}>
 				<span className="row">
 					<label htmlFor="less">Less than: </label>
@@ -26,8 +30,7 @@ const Filters = ({ actions, value }) => {
 						type="number"
 						name="less"
 						value={value.lessQuery}
-						onFocus={() => actions.cleanFilter('less', 'lessQuery')}
-						onChange={(e) => actions.handleFilter(e.target.name, e.target.value)}
+						onChange={(e) => actions.handleFilter('less', 'lessQuery', e.target.value)}
 					/>
 				</span>
 				<span className="row">
@@ -37,8 +40,7 @@ const Filters = ({ actions, value }) => {
 						type="number"
 						name="greater"
 						value={value.greaterQuery}
-						onFocus={() => actions.cleanFilter('greater', 'greaterQuery')}
-						onChange={(e) => actions.handleFilter(e.target.name, e.target.value)}
+						onChange={(e) => actions.handleFilter('greater', 'greaterQuery', e.target.value)}
 					/>
 				</span>
 			</div>

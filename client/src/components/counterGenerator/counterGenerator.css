@@ -34,6 +34,8 @@
 
 .counter-generator input::placeholder {
 	color: #ff404c;
+	font-size: 80%;
+	text-align: center;
 }
 
 .hidden {

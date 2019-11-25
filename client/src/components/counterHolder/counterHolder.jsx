@@ -1,6 +1,6 @@
 import React from 'react';
 import Counter from '../counter/counter';
-import { FaSortDown, FaSortUp } from 'react-icons/fa';
+import { TiArrowSortedDown, TiArrowSortedUp, TiArrowUnsorted } from 'react-icons/ti';
 import './counterHolder.css';
 
 const CounterTable = ({ items, actions, sort }) => {
@@ -9,11 +9,25 @@ const CounterTable = ({ items, actions, sort }) => {
 			<thead>
 				<tr>
 					<th className="clickable" onClick={() => actions.handleSort('title')}>
-						Title {sort.column === 'title' ? sort.order === 'asc' ? <FaSortDown /> : <FaSortUp /> : ''}
+						Title
+						{sort.column === 'title' && sort.active ? sort.order === 'asc' ? (
+							<TiArrowSortedDown />
+						) : (
+							<TiArrowSortedUp />
+						) : (
+							<TiArrowUnsorted />
+						)}
 					</th>
 					<th />
 					<th className="clickable text-center" onClick={() => actions.handleSort('count')}>
-						# {sort.column === 'count' ? sort.order === 'asc' ? <FaSortDown /> : <FaSortUp /> : ''}
+						#
+						{sort.column === 'count' && sort.active ? sort.order === 'asc' ? (
+							<TiArrowSortedDown />
+						) : (
+							<TiArrowSortedUp />
+						) : (
+							<TiArrowUnsorted />
+						)}
 					</th>
 					<th />
 					<th />

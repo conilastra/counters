@@ -17,9 +17,9 @@ button {
 
 .delete-btn {
 	background-color: white;
-	border: 1px solid #ff404c;
+	border: 1px solid #252525;
 	border-radius: 30px;
-	color: #ff404c;
+	color: #252525;
 	font-size: 80%;
 	margin-left: 2rem;
 	padding: .25rem .7rem;
@@ -33,9 +33,9 @@ button {
 }
 
 td:first-child {
-	min-width: 83px;
+	min-width: 4rem;
 }
 
 td:nth-child(3) {
-	min-width: 46px;
+	min-width: 2rem;
 }
