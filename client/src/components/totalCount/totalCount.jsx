@@ -1,9 +1,10 @@
 import React from 'react';
+import './totalCount.css';
 
 const TotalCount = ({ total }) => {
 	return (
 		<div>
-			<span>TOTAL: {total}</span>
+			TOTAL: <div className="total">{total}</div>
 		</div>
 	);
 };

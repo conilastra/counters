@@ -1,0 +1,9 @@
+.total {
+	background-color: #ff404c;
+	border-radius: 100%;
+	color: #fff;
+	display: inline-block;
+	height: 22px;
+	text-align: center;
+	width: 22px;
+}

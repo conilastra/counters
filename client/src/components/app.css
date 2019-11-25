@@ -27,6 +27,18 @@ main {
 	padding: 1rem;
 }
 
+.error {
+	margin: 0 auto;
+	padding: 1rem;
+	width: 80%;
+}
+
+.link {
+	color: #ff404c;
+	cursor: pointer;
+	font-weight: bold;
+}
+
 #full-screen {
 	display: flex;
 	padding: 20% 10%;

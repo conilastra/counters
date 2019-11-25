@@ -11,6 +11,7 @@
 	"author": "Javier Vasquez",
 	"license": "ISC",
 	"dependencies": {
+		"animate.css": "^3.7.2",
 		"body-parser": "^1.16.1",
 		"compression": "^1.6.2",
 		"express": "^4.14.1",

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './filters.css';
 import { FaSortDown } from 'react-icons/fa';
 
-const Filters = ({ actions }) => {
+const Filters = ({ actions, value }) => {
 	const [ display, setDisplay ] = useState('hide');
 
 	const toggleDisplay = () => {
@@ -25,6 +25,8 @@ const Filters = ({ actions }) => {
 						className="sm-input"
 						type="number"
 						name="less"
+						value={value.lessQuery}
+						onFocus={() => actions.cleanFilter('less', 'lessQuery')}
 						onChange={(e) => actions.handleFilter(e.target.name, e.target.value)}
 					/>
 				</span>
@@ -34,6 +36,8 @@ const Filters = ({ actions }) => {
 						className="sm-input"
 						type="number"
 						name="greater"
+						value={value.greaterQuery}
+						onFocus={() => actions.cleanFilter('greater', 'greaterQuery')}
 						onChange={(e) => actions.handleFilter(e.target.name, e.target.value)}
 					/>
 				</span>

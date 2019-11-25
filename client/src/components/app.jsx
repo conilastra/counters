@@ -30,22 +30,25 @@ const App = () => {
 				if (counters.length){
 					total = counters.map(c => c.count).reduce((acc, val) => acc + val);
 					const items = query !== '' ? counters.filter(c => c.title.toLowerCase().includes(query.toLowerCase())) : counters;
-					const filtered = filter.number !== '' ? (filter.type === 'less' ? items.filter(i => i.count < filter.number) : items.filter(i => i.count > filter.number)) : items;
-					sorted = sort.active ? _.orderBy(filtered, [sort.column], [sort.order]) : filtered;
+					const filteredByLess = filter.less ? (filter.greater ? items.filter(i => (i.count < filter.lessQuery && i.count > filter.greaterQuery)) : items.filter(i => i.count < filter.lessQuery)) : items;
+					const filteredByGreater = filter.greater ? filteredByLess.filter(i => i.count > filter.greaterQuery) : filteredByLess;
+					sorted = sort.active ? _.orderBy(filteredByGreater, [sort.column], [sort.order]) : filteredByGreater;
 				}
 				
 				return (
 					<>
 					<header>
-						<Searchbox onSearch={actions.handleSearch}/>
+						<Searchbox onSearch={actions.handleSearch} value={store.query} />
 						<TotalCount total={total ? total : 0} />
 					</header>
 
 					{counters.length ? 
 					<>
-					<Filters actions={actions} />
+					<Filters actions={actions} value={store.filter} />
 					<main>
-						<CounterHolder items={sorted} actions={actions} sort={sort} />
+						{sorted.length ? 
+						<CounterHolder items={sorted} actions={actions} sort={sort} /> :
+						<div className="error">None of the counters match the specified conditions :( <span className="link" onClick={() => actions.cleanSearch()}>Go back</span> </div>}
 						<CounterGenerator onNewCounter={actions.handleNewCounter} /> 
 					</main>
 					</>

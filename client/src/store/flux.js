@@ -8,13 +8,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			counters: [],
 			sort: {
 				column: '',
-				order: '',
-				active: false
+				order: 'desc',
+				active: true
 			},
 			query: '',
 			filter: {
-				type: '',
-				number: ''
+				less: false,
+				lessQuery: '',
+				greater: false,
+				greaterQuery: ''
 			}
 		},
 		actions: {
@@ -35,6 +37,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			handleAddition: async (item) => {
 				const store = getStore();
+				const sort = store.sort;
+				sort.active = false;
+				sort.column = '';
+				await setStore({ sort });
+
 				const counters = [ ...store.counters ];
 				const index = counters.indexOf(item);
 
@@ -74,7 +81,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					sort.column = selectedColumn;
 					sort.order = 'asc';
-					sort.active = false;
+					sort.active = true;
 				}
 
 				setStore({ sort });
@@ -86,14 +93,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ query: '' });
 				}
 			},
-			handleFilter: (type, amount) => {
-				let number;
-				if (amount !== '') {
-					number = parseInt(amount);
-				} else {
-					number = '';
+			handleFilter: (type, number) => {
+				const store = getStore();
+				const filter = { ...store.filter };
+				const query = parseInt(number);
+
+				if (query) {
+					if (type === 'less') {
+						filter.less = true;
+						filter.lessQuery = query;
+					} else {
+						filter.greater = true;
+						filter.greaterQuery = query;
+					}
 				}
-				setStore({ filter: { type, number } });
+
+				setStore({ filter });
+			},
+			cleanFilter: (type, queryType) => {
+				const store = getStore();
+				let filter = { ...store.filter };
+				filter[type] = false;
+				filter[queryType] = '';
+				setStore({ filter });
+			},
+			cleanSearch: () => {
+				const actions = getActions();
+				actions.cleanFilter();
+				setStore({ query: '' });
 			}
 		}
 	};
