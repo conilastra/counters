@@ -30,12 +30,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			handleNewCounter: async (title) => {
 				if (title.trim() !== '') {
 					const store = getStore();
+					const actions = getActions();
+					await actions.getCounters();
 
 					const obj = { title };
 					const { data: counter } = await Axios.post(apiEndpoint, obj);
-					const counters = store.allCounters.length
-						? [ ...store.allCounters, counter ]
-						: [ ...store.counters, counter ];
+					const counters = [ ...store.counters, counter ];
 
 					const filter = { lessQuery: '', greaterQuery: '' };
 					const query = '';
@@ -75,9 +75,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			handleDelete: async (item) => {
 				const store = getStore();
-				let counters = store.allCounters.length ? [ ...store.allCounters ] : [ ...store.counters ];
+				const actions = getActions();
+
+				let counters = [ ...store.counters ];
 				counters = counters.filter((c) => c !== item);
-				setStore({ counters, allCounters: counters });
+				if (counters.length) {
+					setStore({ counters });
+				} else {
+					actions.cleanSearch();
+				}
 
 				const obj = { id: item.id };
 				await Axios.delete(apiEndpoint, { data: obj });
@@ -104,17 +110,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			handleSearch: (query) => {
 				const store = getStore();
+				const actions = getActions();
 				let allCounters = [ ...store.counters ];
 
 				if (query.trim() !== '') {
 					let counters = store.counters.filter((c) => c.title.toLowerCase().includes(query.toLowerCase()));
 					setStore({ query, counters, allCounters });
 				} else {
-					setStore({ query: '', counters: store.allCounters });
+					actions.getCounters();
+					setStore({ query: '' });
 				}
 			},
 			handleFilter: (type, queryType, number) => {
 				const store = getStore();
+				const actions = getActions();
 				let allCounters = [ ...store.counters ];
 
 				const filter = { ...store.filter };
@@ -135,9 +144,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ filter, counters, allCounters });
 				} else {
 					filter[type] = false;
-					filter[queryType] = '';
+					filter.lessQuery = '';
+					filter.greaterQuery = '';
 
-					setStore({ filter, counters: store.allCounters });
+					actions.getCounters();
+					setStore({ filter });
 				}
 			},
 			cleanFilter: (type, queryType) => {
@@ -149,6 +160,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			cleanSearch: () => {
 				const store = getStore();
+				const actions = getActions();
 				let filter = { ...store.filter };
 
 				if (filter.less) {
@@ -158,8 +170,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					filter.greater = false;
 					filter.greaterQuery = '';
 				}
-
-				setStore({ query: '', filter, counters: store.allCounters });
+				actions.getCounters();
+				setStore({ query: '', filter });
 			}
 		}
 	};
