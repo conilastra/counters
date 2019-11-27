@@ -7,19 +7,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			counters: [],
-			allCounters: [],
-			sort: {
-				column: '',
-				order: 'desc',
-				active: true
-			},
-			query: '',
 			filter: {
 				less: false,
 				lessQuery: '',
 				greater: false,
 				greaterQuery: ''
-			}
+			},
+			item: {
+				name: '',
+				type: ''
+			},
+			sort: {
+				column: '',
+				order: 'desc',
+				active: true
+			},
+			query: ''
 		},
 		actions: {
 			getCounters: async () => {
@@ -40,7 +43,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const filter = { lessQuery: '', greaterQuery: '' };
 					const query = '';
 
-					setStore({ counters, filter, query });
+					const item = {};
+					item.name = counter.name;
+					item.type = 'add';
+
+					setStore({ counters, filter, query, item });
 				}
 			},
 			handleAddition: async (item) => {
@@ -87,6 +94,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				const obj = { id: item.id };
 				await Axios.delete(apiEndpoint, { data: obj });
+
+				const deletedItem = {};
+				deletedItem.name = item.name;
+				deletedItem.type = 'delete';
+				setStore({ item: deletedItem });
 			},
 			handleSort: (selectedColumn) => {
 				const store = getStore();

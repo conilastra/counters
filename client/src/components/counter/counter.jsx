@@ -8,19 +8,19 @@ const Counter = ({ item, actions }) => {
 			<td>{title}</td>
 
 			<td>
-				<button className="counter-btn" onClick={(e) => actions.handleSubstraction(item)}>
+				<button className="counter-btn" onClick={() => actions.handleSubstraction(item)}>
 					-
 				</button>
 			</td>
 			<td className="text-center">{count}</td>
 			<td>
-				<button className="counter-btn" onClick={(e) => actions.handleAddition(item)}>
+				<button className="counter-btn" onClick={() => actions.handleAddition(item)}>
 					+
 				</button>
 			</td>
 
 			<td>
-				<button className="delete-btn" onClick={(e) => actions.handleDelete(item)}>
+				<button className="delete-btn" onClick={() => actions.handleDelete(item)}>
 					Delete
 				</button>
 			</td>

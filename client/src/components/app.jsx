@@ -7,7 +7,7 @@ import CounterGenerator from './counterGenerator/counterGenerator';
 import _ from 'lodash';
 import Searchbox from './searchbox/searchbox';
 import Filters from './filters/filters';
-import { NoCounters, NoMatchingItems } from './errorMessages/errorMessages';
+import { NoCounters, NoMatchingItems } from './messages/messages';
 
 const App = () => {
 	let localActions = null;
