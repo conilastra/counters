@@ -1,4 +1,5 @@
 import React from 'react';
+import './errorMessages.css';
 
 const NoCounters = () => {
 	return <h1 className="intro-text">Create your first counter!</h1>;
@@ -7,7 +8,7 @@ const NoCounters = () => {
 const NoMatchingItems = ({ onGoBack }) => {
 	return (
 		<div className="error">
-			<p>None of the counters match the specified conditions :(</p>
+			<p>You don't have counters that match the specified conditions :(</p>
 			<span className="link" onClick={onGoBack}>
 				Go back
 			</span>

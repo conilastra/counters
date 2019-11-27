@@ -1,0 +1,11 @@
+.error {
+	margin: 0 auto;
+	padding-top: 3rem;
+	width: 55%;
+}
+
+@media (min-width: 551px) {
+	.error {
+		width: 80%;
+	}
+}
