@@ -12,7 +12,7 @@ const CounterGenerator = ({ onNewCounter }) => {
 
 	return (
 		<form
-			autocomplete="off"
+			autoComplete="off"
 			className="counter-generator"
 			onSubmit={(e) => {
 				e.preventDefault();

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './filters.css';
-import { IoMdClose } from 'react-icons/io';
 import { FaSlidersH } from 'react-icons/fa';
 
 const Filters = ({ actions, value }) => {

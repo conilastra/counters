@@ -4,10 +4,10 @@ import injectContext, { Consumer } from '../store/appContext';
 import CounterHolder from './counterHolder/counterHolder';
 import TotalCount from './totalCount/totalCount';
 import CounterGenerator from './counterGenerator/counterGenerator';
-import _ from 'lodash';
 import Searchbox from './searchbox/searchbox';
 import Filters from './filters/filters';
 import { NoCounters, NoMatchingItems } from './messages/messages';
+import ReactNotifications from 'react-notifications-component';
 
 const App = () => {
 	let localActions = null;
@@ -16,6 +16,7 @@ const App = () => {
 		if (localActions !== null) {
 			localActions.getCounters();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
@@ -31,6 +32,7 @@ const App = () => {
 
 				return (
 					<React.Fragment>
+						<ReactNotifications />
 						<header>
 							<Searchbox onSearch={actions.handleSearch} value={store.query} />
 							<TotalCount total={total ? total : 0} />
