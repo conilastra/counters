@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import './app.css';
 import injectContext, { Consumer } from '../store/appContext';
 import CounterHolder from './counterHolder/counterHolder';
@@ -18,48 +18,38 @@ const App = () => {
 		}
 	}, []);
 
-
-
 	return (
 		<Consumer>
 			{({ store, actions }) => {
-				let { counters, sort, query, filter, allCounters } = store;
+				let { counters, sort, query, filter } = store;
 				localActions = actions;
 				let total = '';
-				
-				if (counters.length){
-					total = counters.map(c => c.count).reduce((acc, val) => acc + val);
-					allCounters = allCounters.length ? allCounters : counters;
+
+				if (counters.length) {
+					total = counters.map((c) => c.count).reduce((acc, val) => acc + val);
 				}
-				
+
 				return (
-					<>
-						{allCounters.length ?
+					<React.Fragment>
 						<header>
 							<Searchbox onSearch={actions.handleSearch} value={store.query} />
 							<TotalCount total={total ? total : 0} />
-						</header> :
-						''}
+						</header>
 
-						{allCounters.length ? 
-						<>
 						<Filters actions={actions} value={store.filter} />
 						<main>
-							{counters.length && (!query || !filter.greater || !filter.less) ? 
-							<CounterHolder items={counters} actions={actions} sort={sort} /> :
-							<NoMatchingItems onGoBack={() => actions.cleanSearch()} />}
-							<CounterGenerator onNewCounter={actions.handleNewCounter} /> 
+							{counters.length ? (
+								<CounterHolder items={counters} actions={actions} sort={sort} />
+							) : query || filter.less || filter.greater ? (
+								<NoMatchingItems onGoBack={() => actions.cleanSearch()} />
+							) : (
+								<NoCounters />
+							)}
+							<CounterGenerator onNewCounter={actions.handleNewCounter} />
 						</main>
-						</>
-						: 
-						<main id="full-screen">
-							<NoCounters/>
-							<CounterGenerator onNewCounter={actions.handleNewCounter} /> 
-						</main>
-						}
-					
-					</>)
-					}}
+					</React.Fragment>
+				);
+			}}
 		</Consumer>
 	);
 };

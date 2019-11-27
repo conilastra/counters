@@ -1,7 +1,7 @@
 import React from 'react';
 
 const NoCounters = () => {
-	return <h1 className="text-center">You don't have any counters yet</h1>;
+	return <h1 className="intro-text">Create your first counter!</h1>;
 };
 
 const NoMatchingItems = ({ onGoBack }) => {

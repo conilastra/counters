@@ -161,15 +161,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			cleanSearch: () => {
 				const store = getStore();
 				const actions = getActions();
-				let filter = { ...store.filter };
 
-				if (filter.less) {
-					filter.less = false;
-					filter.lessQuery = '';
-				} else if (filter.greater) {
-					filter.greater = false;
-					filter.greaterQuery = '';
-				}
+				let filter = { ...store.filter };
+				filter.less = false;
+				filter.lessQuery = '';
+				filter.greater = false;
+				filter.greaterQuery = '';
+
 				actions.getCounters();
 				setStore({ query: '', filter });
 			}

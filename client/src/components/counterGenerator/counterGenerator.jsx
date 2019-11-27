@@ -29,7 +29,7 @@ const CounterGenerator = ({ onNewCounter }) => {
 			<input
 				name="title"
 				value={title}
-				placeholder="Give it a name and press enter"
+				placeholder="Name your counter"
 				type="text"
 				className={display}
 				onChange={(e) => handleInput(e)}

@@ -39,26 +39,14 @@ main {
 	font-weight: bold;
 }
 
-#full-screen {
-	display: flex;
-	padding: 40% 10%;
-	flex-wrap: wrap;
-	justify-content: center;
+.intro-text {
+	margin: 0 auto;
+	padding-top: 3rem;
+	width: 55%;
 }
 
-#full-screen > form > input {
-	width: 60%;
-}
-
-@media (min-width: 376px) {
-	#full-screen {
-		padding: 20%;
-	}
-}
-
-@media (min-width: 551px) {
-	#full-screen .counter-generator {
-		justify-content: center;
-		width: 360px;
+@media (min-width: 680px) {
+	.intro-text {
+		width: 80%;
 	}
 }
