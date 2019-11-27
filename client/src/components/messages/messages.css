@@ -4,7 +4,7 @@
 	width: 60%;
 }
 
-@media (min-width: 551px) {
+@media (min-width: 657px) {
 	.error {
 		width: 80%;
 	}
