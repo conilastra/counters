@@ -33,13 +33,13 @@ const App = () => {
 				return (
 					<>
 						<ReactNotifications />
-						<header>
+						<header className="header">
 							<Searchbox onSearch={actions.handleSearch} value={store.query} />
 							<TotalCount total={total ? total : 0} />
 						</header>
 
 						<Filters actions={actions} value={store.filter} />
-						<main>
+						<main className="main">
 							{counters.length ? (
 								<CounterHolder items={counters} actions={actions} sort={sort} />
 							) : query || filter.less || filter.greater ? (

@@ -8,7 +8,7 @@ body {
 	margin: 0;
 }
 
-header {
+.header {
 	align-content: center;
 	background-color: #f7f7f794;
 	border-bottom: 1px solid #eaeaea;
@@ -18,12 +18,12 @@ header {
 }
 
 @media (min-width: 376px) {
-	header {
+	.header {
 		padding: 1rem 10%;
 	}
 }
 
-main {
+.main {
 	padding: 1rem;
 }
 
@@ -31,10 +31,4 @@ main {
 	color: #ff404c;
 	cursor: pointer;
 	font-weight: bold;
-}
-
-.intro-text {
-	margin: 0 auto;
-	padding-top: 3rem;
-	width: 55%;
 }

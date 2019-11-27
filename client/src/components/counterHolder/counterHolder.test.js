@@ -7,7 +7,7 @@ import { TiArrowSortedDown, TiArrowSortedUp, TiArrowUnsorted } from 'react-icons
 configure({ adapter: new Adapter() });
 
 describe('CounterHolder', () => {
-	it('renders witohout crashing', () => {
+	it('renders without crashing', () => {
 		const items = [
 			{
 				title: 'Example',

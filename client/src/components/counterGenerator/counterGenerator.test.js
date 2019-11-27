@@ -22,7 +22,7 @@ describe('CounterGenerator', () => {
 		expect(wrapper.find('input').hasClass('visible')).toEqual(true);
 	});
 
-	it('onNewCounter is called when the form is submitted', () => {
+	it('calls onNewCounter when the form is submitted', () => {
 		const onNewCounter = jest.fn();
 		const wrapper = shallow(<CounterGenerator onNewCounter={onNewCounter} />);
 		wrapper.find('input').simulate('change', { target: { value: 'Test' } });

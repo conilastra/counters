@@ -5,7 +5,7 @@ import { FaSlidersH } from 'react-icons/fa';
 const Filters = ({ actions, value }) => {
 	const [ display, setDisplay ] = useState('hide');
 
-	const toggleDisplay = () => {
+	const toggleDisplay = (display) => {
 		if (display === 'hide') {
 			setDisplay('show');
 		} else {
@@ -14,14 +14,14 @@ const Filters = ({ actions, value }) => {
 	};
 
 	return (
-		<div className="filters">
-			<div className="filters__header" onClick={toggleDisplay}>
+		<section className="filters">
+			<header className="filters__header" onClick={() => toggleDisplay(display)}>
 				<h6>Filter your results</h6>
 				<div className="icon">
 					<FaSlidersH />
 				</div>
-			</div>
-			<div className={display}>
+			</header>
+			<main className={display}>
 				<span className="row">
 					<label htmlFor="less">Less than: </label>
 					<input
@@ -42,8 +42,8 @@ const Filters = ({ actions, value }) => {
 						onChange={(e) => actions.handleFilter('greater', 'greaterQuery', e.target.value)}
 					/>
 				</span>
-			</div>
-		</div>
+			</main>
+		</section>
 	);
 };
 
