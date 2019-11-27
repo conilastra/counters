@@ -35,7 +35,7 @@ const CounterTable = ({ items, actions, sort }) => {
 			</thead>
 			<tbody>
 				{items.map((item) => {
-					return <Counter item={item} key={item.name} actions={actions} />;
+					return <Counter item={item} key={item.id} actions={actions} />;
 				})}
 			</tbody>
 		</table>

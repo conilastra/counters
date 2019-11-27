@@ -31,7 +31,7 @@ const App = () => {
 				}
 
 				return (
-					<React.Fragment>
+					<>
 						<ReactNotifications />
 						<header>
 							<Searchbox onSearch={actions.handleSearch} value={store.query} />
@@ -49,7 +49,7 @@ const App = () => {
 							)}
 							<CounterGenerator onNewCounter={actions.handleNewCounter} />
 						</main>
-					</React.Fragment>
+					</>
 				);
 			}}
 		</Consumer>

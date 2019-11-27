@@ -22,7 +22,7 @@ const CounterGenerator = ({ onNewCounter }) => {
 		>
 			<button
 				className="counter-generator__btn"
-				onClick={() => (display === '' ? setDisplay('hidden') : setDisplay(''))}
+				onClick={() => (display === 'visible' ? setDisplay('hidden') : setDisplay('visible'))}
 			>
 				Create counter
 			</button>
